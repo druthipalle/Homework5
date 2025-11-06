@@ -55,7 +55,6 @@ setValidity("sparse_numeric", function(object) {
 
 # numeric → sparse_numeric
 setAs("numeric", "sparse_numeric", function(from) {
-  # indices of nonzero values
   nz <- which(from != 0)
   vals <- from[nz]
   
@@ -124,7 +123,6 @@ setMethod("sparse_sub", c("sparse_numeric", "sparse_numeric"),
 setMethod("sparse_mult", c("sparse_numeric", "sparse_numeric"),
           function(x, y) {
             .check_same_length(x, y)
-            # only overlapping positions matter
             common <- intersect(x@pos, y@pos)
             if (length(common) == 0L)
               return(new("sparse_numeric", value = numeric(), pos = integer(), length = x@length))
