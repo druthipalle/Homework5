@@ -20,31 +20,31 @@ setValidity("sparse_numeric", function(object) {
   
   # length slot
   if (length(len) != 1L || !is.integer(len) || is.na(len) || len < 0L)
-    errs <- c(errs, "`length` must be a single non-negative integer.")
+    errs <- c(errs, "`length` must be a single non-negative integer")
   
   # type checks
   if (!is.integer(pos))
-    errs <- c(errs, "`pos` must be an integer vector.")
+    errs <- c(errs, "`pos` must be an integer vector")
   if (!is.numeric(val))
-    errs <- c(errs, "`value` must be a numeric vector.")
+    errs <- c(errs, "`value` must be a numeric vector")
   
   # matching lengths
   if (length(pos) != length(val))
-    errs <- c(errs, "`pos` and `value` must have the same length.")
+    errs <- c(errs, "`pos` and `value` must have the same length")
   
   # bounds & sorting
   if (length(pos) > 0L) {
     if (any(pos < 1L))
-      errs <- c(errs, "`pos` values must be >= 1.")
+      errs <- c(errs, "`pos` values must be >= 1")
     if (any(pos > len))
-      errs <- c(errs, "`pos` cannot exceed `length`.")
+      errs <- c(errs, "`pos` cannot exceed `length`")
     if (is.unsorted(pos, strictly = TRUE))
-      errs <- c(errs, "`pos` must be strictly increasing (sorted, no duplicates).")
+      errs <- c(errs, "`pos` must be strictly increasing (sorted, no duplicates)")
   }
   
   # non-zero values
   if (any(val == 0))
-    errs <- c(errs, "`value` cannot contain zeros.")
+    errs <- c(errs, "`value` cannot contain zeros")
   
   # final
   if (length(errs)) errs else TRUE
